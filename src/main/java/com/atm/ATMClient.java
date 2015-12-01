@@ -362,7 +362,7 @@ public class ATMClient {
 	       }
 	       catch(Exception e)
 	       {
-	    	   JOptionPane.showMessageDialog(null, "Field card nimber must contain only numbers");
+	    	   JOptionPane.showMessageDialog(null, "Field card number must contain only numbers");
 	       }
 	     
 	    }                                        
