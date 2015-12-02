@@ -129,15 +129,13 @@ public class ATMClient {
 	    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
 	    private void initComponents() {
 
+	    	
+	    	
 	        jLabel1 = new JLabel();
 	        jTabbedPane1 = new JTabbedPane();
-	        Gate = new JPanel();
+	        Gate = new keyboardPanel(access, this);
 	        jLabel2 = new JLabel();
 	        jLabel3 = new JLabel();
-	        cardNumberField = new JTextField();
-	        passwordField = new JPasswordField();
-	        okButton = new JButton();
-	        cancelButton = new JButton();
 	        Info = new JPanel();
 	        hiText = new JLabel();
 	        jLabel5 = new JLabel();
@@ -152,72 +150,18 @@ public class ATMClient {
 	        jMenu1 = new JMenu();
 	        jMenuItem1 = new JMenuItem();
 
+	        
+	        
 	        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 	        jLabel1.setFont(new java.awt.Font("Papyrus", 2, 18)); // NOI18N
 	        jLabel1.setText("ATM");
 
-	        Gate.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
 	        jLabel2.setText("Card number");
 
 	        jLabel3.setText("Password");
 
-	        okButton.setText("OK");
-	        okButton.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	                okButtonActionPerformed(evt);
-	            }
-	        });
-
-	        cancelButton.setText("Cancel");
-	        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	                cancelButtonActionPerformed(evt);
-	            }
-	        });
-
-	        GroupLayout GateLayout = new GroupLayout(Gate);
-	        Gate.setLayout(GateLayout);
-	        GateLayout.setHorizontalGroup(
-	            GateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	            .addGroup(GateLayout.createSequentialGroup()
-	                .addContainerGap()
-	                .addGroup(GateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	                    .addGroup(GateLayout.createSequentialGroup()
-	                        .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-	                        .addGap(42, 42, 42)
-	                        .addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
-	                    .addGroup(GateLayout.createSequentialGroup()
-	                        .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-	                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-	                        .addComponent(cardNumberField))
-	                    .addGroup(GroupLayout.Alignment.TRAILING, GateLayout.createSequentialGroup()
-	                        .addGap(0, 0, Short.MAX_VALUE)
-	                        .addGroup(GateLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-	                            .addComponent(cancelButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                            .addComponent(okButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-	                .addContainerGap())
-	        );
-	        GateLayout.setVerticalGroup(
-	            GateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	            .addGroup(GateLayout.createSequentialGroup()
-	                .addGap(45, 45, 45)
-	                .addGroup(GateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-	                    .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-	                    .addComponent(cardNumberField, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-	                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-	                .addGroup(GateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-	                    .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-	                    .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-	                .addGap(27, 27, 27)
-	                .addComponent(okButton)
-	                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-	                .addComponent(cancelButton)
-	                .addContainerGap(107, Short.MAX_VALUE))
-	        );
-
-	        jTabbedPane1.addTab("Bank name", Gate);
+	        jTabbedPane1.add("Bank name",Gate);
 
 	        Info.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -244,7 +188,6 @@ public class ATMClient {
 	                endButtonActionPerformed(evt);
 	            }
 	        });
-	        
 
 	        jLabel9.setText("Withdraw");
 
@@ -346,31 +289,7 @@ public class ATMClient {
 
 	        pack();
 	    }// </editor-fold>                        
-
-	    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	       String card = cardNumberField.getText();
-	       String pass = passwordField.getText();
-	       cardNumberField.setText("");
-	       passwordField.setText("");
-	       if(card.equals("")||pass.equals("")) return;
-	       try
-	       {
-	    	   int cardNumber = Integer.valueOf(card);
-	    	   access.getInfo(cardNumber, pass);
-	    	   this.card = cardNumber;
-	    	   this.password = pass;
-	       }
-	       catch(Exception e)
-	       {
-	    	   JOptionPane.showMessageDialog(null, "Field card number must contain only numbers");
-	       }
-	     
-	    }                                        
-
-	    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-	       cardNumberField.setText("");
-	       passwordField.setText("");
-	    }                                            
+                                                                                
 
 	    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
 	    	access.stopCommunication();
@@ -396,20 +315,20 @@ public class ATMClient {
 	    private void endButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
 	    	password ="";
 	    	card = -1;
+	    	
 	    	jTabbedPane1.remove(Info);
+	    	Gate = new keyboardPanel(access, this);
 	    	jTabbedPane1.add("Bank name",Gate);
 	    }                                         
 
 
 	    // Variables declaration - do not modify   
-	    private String password;
-	    private int card;
+	    public String password;
+	    public int card;
 	    private BankAccess access;
-	    private JPanel Gate;
+	    private keyboardPanel Gate;
 	    private JPanel Info;
 	    private JLabel balanceText;
-	    private JButton cancelButton;
-	    private JTextField cardNumberField;
 	    private JButton endButton;
 	    private JLabel hiText;
 	    private JLabel jLabel1;
@@ -423,8 +342,6 @@ public class ATMClient {
 	    private JMenuItem jMenuItem1;
 	    private JTabbedPane jTabbedPane1;
 	    private JLabel limitText;
-	    private JButton okButton;
-	    private JPasswordField passwordField;
 	    private JButton performButton;
 	    private JTextField withdrawField;
 	    // End of variables declaration                   
@@ -443,6 +360,9 @@ public class ATMClient {
 				}
 				else
 				{
+			    	jTabbedPane1.remove(Gate);
+					Gate = new keyboardPanel(access, this);
+			    	jTabbedPane1.add("Bank name",Gate);
 					JOptionPane.showMessageDialog(null, "Something went wrong\n"
 							+ "Possible reasons:\n"
 							+ "- No such a client into database\n"
@@ -468,6 +388,326 @@ public class ATMClient {
 			
 		}
 	}
+	
+	static class keyboardPanel extends javax.swing.JPanel {
+
+		BankAccess access;
+		ATM atm;
+		
+	    /** Creates new form keyboardPanel 
+	     * @param atm */
+	    public keyboardPanel(BankAccess bank, ATM atm) {
+	    	this.access = bank;
+	    	this.atm = atm;
+	        initComponents();
+	    }
+
+	    /** This method is called from within the constructor to
+	     * initialize the form.
+	     * WARNING: Do NOT modify this code. The content of this method is
+	     * always regenerated by the Form Editor.
+	     */
+	    @SuppressWarnings("unchecked")
+	    private void initComponents() {
+
+	        jPanel1 = new javax.swing.JPanel();
+	        keyboard1 = new javax.swing.JButton();
+	        keyboard3 = new javax.swing.JButton();
+	        keyboard2 = new javax.swing.JButton();
+	        keyboard6 = new javax.swing.JButton();
+	        keyboard5 = new javax.swing.JButton();
+	        keyboard4 = new javax.swing.JButton();
+	        keyboard9 = new javax.swing.JButton();
+	        keyboard8 = new javax.swing.JButton();
+	        keyboard7 = new javax.swing.JButton();
+	        keyboardEnter = new javax.swing.JButton();
+	        keyboard0 = new javax.swing.JButton();
+	        keyboardCancel = new javax.swing.JButton();
+	        labelMessage = new javax.swing.JLabel();
+	        labelUserInput = new javax.swing.JLabel();
+
+	        keyboard1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard1.setText("1");
+	        keyboard1.setToolTipText("");
+	        keyboard1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard1ActionPerformed(evt);
+	            }
+	        });
+
+	        keyboard3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard3.setText("3");
+	        keyboard3.setToolTipText("");
+	        keyboard3.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard3ActionPerformed(evt);
+	            }
+	        });
+
+	        keyboard2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard2.setText("2");
+	        keyboard2.setToolTipText("");
+	        keyboard2.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard2ActionPerformed(evt);
+	            }
+	        });
+
+	        keyboard6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard6.setText("6");
+	        keyboard6.setToolTipText("");
+	        keyboard6.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard6ActionPerformed(evt);
+	            }
+	        });
+
+	        keyboard5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard5.setText("5");
+	        keyboard5.setToolTipText("");
+	        keyboard5.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard5ActionPerformed(evt);
+	            }
+	        });
+
+	        keyboard4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard4.setText("4");
+	        keyboard4.setToolTipText("");
+	        keyboard4.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard4ActionPerformed(evt);
+	            }
+	        });
+
+	        keyboard9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard9.setText("9");
+	        keyboard9.setToolTipText("");
+	        keyboard9.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard9ActionPerformed(evt);
+	            }
+	        });
+
+	        keyboard8.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard8.setText("8");
+	        keyboard8.setToolTipText("");
+	        keyboard8.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard8ActionPerformed(evt);
+	            }
+	        });
+
+	        keyboard7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard7.setText("7");
+	        keyboard7.setToolTipText("");
+	        keyboard7.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard7ActionPerformed(evt);
+	            }
+	        });
+
+	        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+	        jPanel1.setLayout(jPanel1Layout);
+	        jPanel1Layout.setHorizontalGroup(
+	            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+	                .addGroup(jPanel1Layout.createSequentialGroup()
+	                    .addComponent(keyboard4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                    .addComponent(keyboard5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                    .addComponent(keyboard6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                .addGroup(jPanel1Layout.createSequentialGroup()
+	                    .addComponent(keyboard1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                    .addComponent(keyboard2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                    .addComponent(keyboard3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	            .addGroup(jPanel1Layout.createSequentialGroup()
+	                .addComponent(keyboard7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addComponent(keyboard8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addComponent(keyboard9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+	        );
+	        jPanel1Layout.setVerticalGroup(
+	            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(jPanel1Layout.createSequentialGroup()
+	                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(keyboard1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(keyboard2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(keyboard3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(keyboard4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(keyboard5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(keyboard6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(keyboard7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(keyboard8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(keyboard9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	        );
+
+	        keyboardEnter.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboardEnter.setText(">");
+	        keyboardEnter.setToolTipText("");
+	        keyboardEnter.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboardEnterActionPerformed(evt);
+	            }
+	        });
+
+	        keyboard0.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboard0.setText("0");
+	        keyboard0.setToolTipText("");
+	        keyboard0.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboard0ActionPerformed(evt);
+	            }
+	        });
+
+	        keyboardCancel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+	        keyboardCancel.setText("C");
+	        keyboardCancel.setToolTipText("");
+	        keyboardCancel.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                keyboardCancelActionPerformed(evt);
+	            }
+	        });
+
+	        labelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+	        labelMessage.setText("Enter your card number and press '>'");
+
+	        labelUserInput.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+	        this.setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGap(57, 57, 57)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addComponent(keyboardEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(keyboard0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(keyboardCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	                .addContainerGap(60, Short.MAX_VALUE))
+	            .addComponent(labelMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+	            .addComponent(labelUserInput, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addGap(37, 37, 37)
+	                .addComponent(labelMessage)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addComponent(labelUserInput, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+	                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(keyboardEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(keyboard0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(keyboardCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	        );
+	    }// </editor-fold>
+
+	private void keyboard1ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"1");
+	}
+
+	private void keyboard3ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"3");
+	}
+
+	private void keyboard2ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"2");
+	}
+
+	private void keyboard6ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"6");
+	}
+
+	private void keyboard5ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"5");
+	}
+
+	private void keyboard4ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"4");
+	}
+
+	private void keyboard9ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"9");
+	}
+
+	private void keyboard8ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"8");
+	}
+
+	private void keyboard7ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"7");
+	}
+
+	private void keyboardEnterActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==0 && !labelUserInput.getText().equals("")) {
+			status++;
+			labelMessage.setText("Please enter your pin-code and press '>'");
+			cardN = labelUserInput.getText();
+		} else if (!labelUserInput.getText().equals("")){
+		       String pass = labelUserInput.getText();
+		       try
+		       {
+		    	   int cardNumber = Integer.valueOf(cardN);
+		    	   access.getInfo(cardNumber, pass);
+		    	   atm.card = cardNumber;
+		    	   atm.password = pass;
+		       }
+		       catch(Exception e)
+		       {
+		    	   e.printStackTrace();
+		    	   //JOptionPane.showMessageDialog(null, "Field card number must contain only numbers");
+		       }
+		}
+		labelUserInput.setText("");
+	}
+
+	private void keyboard0ActionPerformed(java.awt.event.ActionEvent evt) {
+		labelUserInput.setText(labelUserInput.getText()+"0");
+	}
+
+	private void keyboardCancelActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1 && labelUserInput.getText().equals("")) {
+			status--;
+			labelMessage.setText("Enter your card number and press '>'");
+		}
+		labelUserInput.setText("");
+	}
+
+	    private int status = 0;
+	    private String cardN;
+	    private javax.swing.JPanel jPanel1;
+	    private javax.swing.JButton keyboard0;
+	    private javax.swing.JButton keyboard1;
+	    private javax.swing.JButton keyboard2;
+	    private javax.swing.JButton keyboard3;
+	    private javax.swing.JButton keyboard4;
+	    private javax.swing.JButton keyboard5;
+	    private javax.swing.JButton keyboard6;
+	    private javax.swing.JButton keyboard7;
+	    private javax.swing.JButton keyboard8;
+	    private javax.swing.JButton keyboard9;
+	    private javax.swing.JButton keyboardCancel;
+	    private javax.swing.JButton keyboardEnter;
+	    private javax.swing.JLabel labelMessage;
+	    private javax.swing.JLabel labelUserInput;
+	    // End of variables declaration
+	}
+	
 	public static void startBankAccess(InetAddress addr, int port)
 	{
 		final int fport = port;
