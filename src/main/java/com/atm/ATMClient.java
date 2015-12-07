@@ -15,7 +15,7 @@ import javax.swing.*;
 /**
  * ATM client for BankManager
  * @author Stacy
- *
+ * @author Ivan Polomani
  */
 public class ATMClient {
 	
@@ -618,38 +618,74 @@ public class ATMClient {
 	    }// </editor-fold>
 
 	private void keyboard1ActionPerformed(java.awt.event.ActionEvent evt) {
-		labelUserInput.setText(labelUserInput.getText()+"1");
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="1";
+		} else
+			labelUserInput.setText(labelUserInput.getText()+"1");
 	}
 
 	private void keyboard3ActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="3";
+		} else
 		labelUserInput.setText(labelUserInput.getText()+"3");
 	}
 
 	private void keyboard2ActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="2";
+		} else
 		labelUserInput.setText(labelUserInput.getText()+"2");
 	}
 
 	private void keyboard6ActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="6";
+		} else
 		labelUserInput.setText(labelUserInput.getText()+"6");
 	}
 
 	private void keyboard5ActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="5";
+		} else
 		labelUserInput.setText(labelUserInput.getText()+"5");
 	}
 
 	private void keyboard4ActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="4";
+		} else
 		labelUserInput.setText(labelUserInput.getText()+"4");
 	}
 
 	private void keyboard9ActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="9";
+		} else
 		labelUserInput.setText(labelUserInput.getText()+"9");
 	}
 
 	private void keyboard8ActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="8";
+		} else
 		labelUserInput.setText(labelUserInput.getText()+"8");
 	}
 
 	private void keyboard7ActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="7";
+		} else
 		labelUserInput.setText(labelUserInput.getText()+"7");
 	}
 
@@ -659,13 +695,13 @@ public class ATMClient {
 			labelMessage.setText("Please enter your pin-code and press '>'");
 			cardN = labelUserInput.getText();
 		} else if (!labelUserInput.getText().equals("")){
-		       String pass = labelUserInput.getText();
 		       try
 		       {
 		    	   int cardNumber = Integer.valueOf(cardN);
 		    	   access.getInfo(cardNumber, pass);
 		    	   atm.card = cardNumber;
 		    	   atm.password = pass;
+		    	   System.out.println(pass);
 		       }
 		       catch(Exception e)
 		       {
@@ -674,9 +710,14 @@ public class ATMClient {
 		       }
 		}
 		labelUserInput.setText("");
+		pass="";
 	}
 
 	private void keyboard0ActionPerformed(java.awt.event.ActionEvent evt) {
+		if (status==1) {
+			labelUserInput.setText(labelUserInput.getText()+"*");
+			pass+="0";
+		} else
 		labelUserInput.setText(labelUserInput.getText()+"0");
 	}
 
@@ -686,8 +727,10 @@ public class ATMClient {
 			labelMessage.setText("Enter your card number and press '>'");
 		}
 		labelUserInput.setText("");
+		pass="";
 	}
 
+		private String pass = "";
 	    private int status = 0;
 	    private String cardN;
 	    private javax.swing.JPanel jPanel1;

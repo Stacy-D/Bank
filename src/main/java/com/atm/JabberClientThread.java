@@ -11,7 +11,7 @@ import javax.swing.*;
 /**
  * 
  * @author Stacy
- *
+ * @author Ivan Polomani (GUI)
  */
 public class JabberClientThread  {
 	private static final Logger LOG = Logger.getLogger(JabberClientThread.class.getName());
@@ -136,7 +136,7 @@ public class JabberClientThread  {
 	}
 	/**
 	 * Frame of BankBranch
-	 * @author Stacy
+	 * @author Ivan Polomani
 	 *
 	 */
 	static class BankBranch extends JFrame implements Observer {
@@ -263,7 +263,7 @@ public class JabberClientThread  {
 	}
 	/**
 	 * Add client panel
-	 * @author Stacy
+	 * @author Ivan Polomani
 	 *
 	 */
 	static class AddClient extends JPanel implements Observer {
@@ -929,7 +929,7 @@ public class JabberClientThread  {
 	}
 	/**
 	 *
-	 * @author Stacy
+	 * @author Ivan Polomani
 	 */
 	static class InfoPanel extends javax.swing.JPanel implements Observer {
 

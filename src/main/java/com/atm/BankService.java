@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Properties;
 
 /**
- *
+ * @author Oleh Kurpiak
  *
  */
 public class BankService {

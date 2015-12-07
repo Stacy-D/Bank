@@ -6,7 +6,7 @@ import java.util.TimeZone;
 
 /**
  * it is the Transaction class
- * @author natalia
+ * @author Stacy
  */
 
 

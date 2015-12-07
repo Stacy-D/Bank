@@ -17,7 +17,7 @@ import java.util.TimeZone;
 
 /**
  * it is the Client class
- * @author natalia
+ * @author Stacy
  */
 
 public class Client {
