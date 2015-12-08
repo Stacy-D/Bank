@@ -594,15 +594,15 @@ public class ATMPanel extends JPanel implements Observer {
 			break;
 		case USER_MENU:
 			labelMessage.setText("<html><center>Choose action</center><br/><br/><br/><br/><br/><br/> "
-					+ "<font color='#B4C9CC'>...........................</font> "
+					+ "<font color='#B4C9CC'>......................</font> "
 					+ "see balance<br/><br/><br/><font color='#B4C9CC'>"
-					+ "......................</font>withdraw money</html>");
+					+ ".................</font>withdraw money</html>");
 			labelUserInput.setText("");
 			break;
 		case USER_BALANCE:
 			labelMessage.setText("");
 			break;
-		case AMOUNT_OF_MONEY_TO_WITHDRAW:
+		case AMOUNT_MONEY_WITHDRAW:
 			labelMessage.setText("<html><br/>Please enter amount to withdraw<br/>"
 					+ "(multiple of 50)<br/><br/><br/>"
 					+ "<br/><br/><br/><br/><br/><font color='#B4C9CC'>...........</font>"
@@ -613,7 +613,8 @@ public class ATMPanel extends JPanel implements Observer {
 			labelMessage.setText("<html><br/><br/><br/>Operation is successful<br/><br/><br/><br/><br/><br/><br/>back</html>");
 			labelUserInput.setText("");
 			break;
-		case CREDITS_ARE_INCORRECT:
+		case CREDITS_INCORRECT:
+		case LOGIN_INCORRECT:
 			labelMessage.setText("<html><br/><br/><br/>Something went wrong<br/><br/><br/><br/><br/><br/><br/>back</html>");
 			labelUserInput.setText("");
 			break;
@@ -634,7 +635,7 @@ public class ATMPanel extends JPanel implements Observer {
 			labelUserInput.setText(labelUserInput.getText()+"*");
 			pass+=key;
 			break;
-		case AMOUNT_OF_MONEY_TO_WITHDRAW:
+		case AMOUNT_MONEY_WITHDRAW:
 			labelUserInput.setText(labelUserInput.getText()+key);
 			break;
 		}	
@@ -692,7 +693,7 @@ public class ATMPanel extends JPanel implements Observer {
 	private void keyboardCancelActionPerformed(java.awt.event.ActionEvent evt) {
 		switch(state) {
 		case EXPECTING_CARD:
-		case AMOUNT_OF_MONEY_TO_WITHDRAW:
+		case AMOUNT_MONEY_WITHDRAW:
 			labelUserInput.setText("");
 			break;
 		case EXPECTING_PASS:
@@ -715,8 +716,11 @@ public class ATMPanel extends JPanel implements Observer {
 			setState(USER_MENU);
 			break;
 		case SUCCESS:
-		case CREDITS_ARE_INCORRECT:
+		case LOGIN_INCORRECT:
 			setState(EXPECTING_CARD);
+			break;
+		case CREDITS_INCORRECT:
+			setState(USER_MENU);
 			break;
 		}
 	}
@@ -744,14 +748,14 @@ public class ATMPanel extends JPanel implements Observer {
 			access.getInfo(cardN, pass);
 			break;
 		case USER_MENU:
-			setState(AMOUNT_OF_MONEY_TO_WITHDRAW);
+			setState(AMOUNT_MONEY_WITHDRAW);
 			break;
-		case AMOUNT_OF_MONEY_TO_WITHDRAW:
+		case AMOUNT_MONEY_WITHDRAW:
 			int amount = Integer.valueOf(labelUserInput.getText());
 			if(amount%50==0) {
 				access.withdrawMoney(cardN, pass, amount);
 			} else {
-				setState(CREDITS_ARE_INCORRECT);
+				setState(CREDITS_INCORRECT);
 				labelMessage.setText("<html><br/><br/><br/>Incorrect amount<br/><br/><br/><br/><br/><br/><br/>back</html>");
 				labelUserInput.setText("");
 			}
@@ -788,7 +792,6 @@ public class ATMPanel extends JPanel implements Observer {
 	// End of variables declaration
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println(arg);
 		final String args = arg.toString();
 		if(args.startsWith("RESPGetinfo"))
 		{
@@ -810,7 +813,7 @@ public class ATMPanel extends JPanel implements Observer {
 			{
 				switch(state) {
 				case EXPECTING_PASS:
-					setState(CREDITS_ARE_INCORRECT);
+					setState(LOGIN_INCORRECT);
 				}
 			}
 		}
@@ -822,7 +825,7 @@ public class ATMPanel extends JPanel implements Observer {
 			}
 			else if(args.contains("F"))
 			{
-				setState(CREDITS_ARE_INCORRECT);
+				setState(CREDITS_INCORRECT);
 			}
 		}
 		
